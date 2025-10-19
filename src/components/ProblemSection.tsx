@@ -1,6 +1,9 @@
 import { AlertCircle, CheckCircle } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const ProblemSection = () => {
+  const { ref: cardsRef, isVisible: cardsVisible } = useScrollReveal(0.2);
+  
   return (
     <section className="bg-primary py-20 relative overflow-hidden">
       {/* Decorative crescent pattern */}
@@ -18,11 +21,16 @@ const ProblemSection = () => {
             <span className="font-semibold text-accent-foreground"> SalahFlow gets it</span> – it's built for people like us, so you can <span className="font-semibold text-accent-foreground">stay productive and pray on time</span>, every time.
           </p>
           
-          <div className="grid md:grid-cols-2 gap-8 pt-8">
+          <div 
+            ref={cardsRef}
+            className={`grid md:grid-cols-2 gap-8 pt-8 transition-all duration-700 ${
+              cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             {/* Before - Stressed */}
-            <div className="bg-secondary/30 backdrop-blur-sm rounded-2xl p-8 space-y-4 border border-primary-foreground/10">
-              <div className="w-16 h-16 mx-auto bg-destructive/20 rounded-full flex items-center justify-center">
-                <AlertCircle className="w-8 h-8 text-destructive-foreground" />
+            <div className="bg-secondary/30 backdrop-blur-sm rounded-2xl p-8 space-y-4 border border-primary-foreground/10 transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-destructive/50 hover:bg-secondary/40 cursor-pointer group">
+              <div className="w-16 h-16 mx-auto bg-destructive/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <AlertCircle className="w-8 h-8 text-destructive-foreground group-hover:rotate-12 transition-transform duration-300" />
               </div>
               <h3 className="text-xl font-semibold text-primary-foreground">Without SalahFlow</h3>
               <ul className="space-y-2 text-primary-foreground/80">
@@ -34,9 +42,9 @@ const ProblemSection = () => {
             </div>
             
             {/* After - Calm */}
-            <div className="bg-accent/20 backdrop-blur-sm rounded-2xl p-8 space-y-4 border border-accent shadow-lg">
-              <div className="w-16 h-16 mx-auto bg-accent rounded-full flex items-center justify-center">
-                <CheckCircle className="w-8 h-8 text-accent-foreground" />
+            <div className="bg-accent/20 backdrop-blur-sm rounded-2xl p-8 space-y-4 border border-accent shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:border-accent hover:bg-accent/30 cursor-pointer group">
+              <div className="w-16 h-16 mx-auto bg-accent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <CheckCircle className="w-8 h-8 text-accent-foreground group-hover:rotate-12 transition-transform duration-300" />
               </div>
               <h3 className="text-xl font-semibold text-primary-foreground">With SalahFlow</h3>
               <ul className="space-y-2 text-primary-foreground/80">

@@ -1,4 +1,5 @@
 import { Download, MapPin, Bell, Laptop } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const steps = [
   {
@@ -28,6 +29,8 @@ const steps = [
 ];
 
 const HowItWorksSection = () => {
+  const { ref: stepsRef, isVisible: stepsVisible } = useScrollReveal(0.2);
+  
   return (
     <section className="gradient-section py-20 relative overflow-hidden">
       {/* Decorative wave pattern */}
@@ -45,18 +48,24 @@ const HowItWorksSection = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div 
+            ref={stepsRef}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
             {steps.map((step, index) => (
               <div 
                 key={index}
-                className="relative"
+                className={`relative transition-all duration-500 ${
+                  stepsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
               >
                 {/* Connector line for desktop */}
                 {index < steps.length - 1 && (
                   <div className="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-primary-foreground/20 -z-10"></div>
                 )}
                 
-                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-2xl p-6 space-y-4 border border-primary-foreground/20 hover:bg-primary-foreground/15 transition-all">
+                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-2xl p-6 space-y-4 border border-primary-foreground/20 hover:bg-primary-foreground/15 transition-all duration-300 hover:scale-105 hover:shadow-xl">
                   <div className="relative">
                     <div className="w-16 h-16 bg-primary rounded-xl flex items-center justify-center mx-auto">
                       <step.icon className="w-8 h-8 text-primary-foreground" />

@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const faqs = [
   {
@@ -33,6 +34,8 @@ const faqs = [
 ];
 
 const FAQSection = () => {
+  const { ref: faqRef, isVisible: faqVisible } = useScrollReveal(0.2);
+  
   return (
     <section className="gradient-section py-20 relative overflow-hidden">
       {/* Islamic arch pattern */}
@@ -47,20 +50,32 @@ const FAQSection = () => {
             </h2>
           </div>
           
-          <Accordion type="single" collapsible className="space-y-4">
+          <Accordion 
+            type="single" 
+            collapsible 
+            className="space-y-4"
+          >
             {faqs.map((faq, index) => (
-              <AccordionItem 
-                key={index} 
-                value={`item-${index}`}
-                className="bg-primary-foreground/90 backdrop-blur-sm rounded-xl border border-primary-foreground/20 px-6 overflow-hidden"
+              <div
+                key={index}
+                ref={index === 0 ? faqRef : undefined}
+                className={`transition-all duration-500 ${
+                  faqVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <AccordionTrigger className="text-lg font-semibold text-secondary hover:text-primary transition-colors py-6">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed pb-6">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
+                <AccordionItem 
+                  value={`item-${index}`}
+                  className="bg-primary-foreground/90 backdrop-blur-sm rounded-xl border border-primary-foreground/20 px-6 overflow-hidden hover:shadow-lg hover:border-primary transition-all"
+                >
+                  <AccordionTrigger className="text-lg font-semibold text-secondary hover:text-primary transition-colors py-6">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground leading-relaxed pb-6">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              </div>
             ))}
           </Accordion>
         </div>

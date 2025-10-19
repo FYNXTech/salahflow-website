@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const testimonials = [
   {
@@ -25,6 +26,8 @@ const testimonials = [
 ];
 
 const TestimonialsSection = () => {
+  const { ref: testimonialsRef, isVisible: testimonialsVisible } = useScrollReveal(0.2);
+  
   return (
     <section className="bg-background py-20 border-t-4 border-primary border-b-4 border-primary">
       <div className="container mx-auto px-4">
@@ -35,11 +38,17 @@ const TestimonialsSection = () => {
             </h2>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div 
+            ref={testimonialsRef}
+            className="grid md:grid-cols-3 gap-8 mb-12"
+          >
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index}
-                className="bg-primary/5 rounded-2xl p-8 space-y-6 border border-primary/20 hover:shadow-xl transition-all hover:border-primary"
+                className={`bg-primary/5 rounded-2xl p-8 space-y-6 border border-primary/20 hover:shadow-xl transition-all duration-500 hover:border-primary hover:-translate-y-2 ${
+                  testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <div className="flex gap-1">
                   {[...Array(5)].map((_, i) => (

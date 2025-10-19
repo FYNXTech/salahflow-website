@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Clock, Bell, Chrome, MapPin } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const features = [
   {
@@ -25,6 +26,8 @@ const features = [
 ];
 
 const FeaturesSection = () => {
+  const { ref: featuresRef, isVisible: featuresVisible } = useScrollReveal(0.2);
+  
   return (
     <section className="bg-background py-20 border-t-4 border-primary border-b-4 border-primary">
       <div className="container mx-auto px-4">
@@ -38,11 +41,17 @@ const FeaturesSection = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div 
+            ref={featuresRef}
+            className="grid md:grid-cols-2 gap-8 mb-12"
+          >
             {features.map((feature, index) => (
               <div 
                 key={index}
-                className="bg-card rounded-2xl p-8 border border-border hover:shadow-xl transition-all duration-300 group hover:border-primary"
+                className={`bg-card rounded-2xl p-8 border border-border hover:shadow-xl transition-all duration-500 group hover:border-primary hover:-translate-y-2 ${
+                  featuresVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
               >
                 <div className="w-16 h-16 bg-primary rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <feature.icon className="w-8 h-8 text-primary-foreground" />
