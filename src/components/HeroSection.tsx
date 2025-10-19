@@ -4,10 +4,10 @@ import logo from "@/assets/salah-flow-logo.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center gradient-hero islamic-pattern overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary to-primary-dark overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-20 right-20 w-32 h-32 bg-secondary/10 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 left-20 w-40 h-40 bg-primary-foreground/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-20 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 py-20 relative z-10">
         <div className="max-w-6xl mx-auto">
@@ -16,15 +16,15 @@ const HeroSection = () => {
             <div className="text-center lg:text-left space-y-6">
               <div className="flex items-center justify-center lg:justify-start gap-3 mb-8">
                 <img src={logo} alt="SalahFlow Logo" className="w-16 h-16" />
-                <h2 className="text-3xl font-bold text-primary-foreground">SalahFlow</h2>
+                <h2 className="text-3xl font-bold text-secondary">SalahFlow</h2>
               </div>
               
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondary leading-tight">
                 Never Miss a Salah, Even on Your Busiest Workday
               </h1>
               
-              <p className="text-lg md:text-xl text-primary-foreground/90 leading-relaxed">
-                <span className="font-semibold">Assalamu Alaikum, Muslim professional!</span> I know the struggle of juggling deadlines while checking prayer times across tabs. SalahFlow brings prayer reminders right to your Chrome browser – <span className="font-semibold text-accent-foreground">one click</span>, custom notifications, and <span className="font-semibold text-accent-foreground">peace of mind</span>.
+              <p className="text-lg md:text-xl text-secondary/90 leading-relaxed">
+                <span className="font-semibold">Assalamu Alaikum, Muslim professional!</span> I know the struggle of juggling deadlines while checking prayer times across tabs. SalahFlow brings prayer reminders right to your Chrome browser – <span className="font-semibold text-secondary">one click</span>, custom notifications, and <span className="font-semibold text-secondary">peace of mind</span>.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
